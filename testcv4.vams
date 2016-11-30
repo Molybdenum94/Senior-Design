@@ -7,8 +7,8 @@ function_b x * x;
 end
 endfunction
 
-integer x,y,z;;
-real a,b,c;;
+integer x,y,z;
+real a,b,c;
 analog begin
 x = 3;
 y = 2;

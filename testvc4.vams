@@ -1,0 +1,17 @@
+module testvc4;
+analog begin
+integer a,b,c;
+real x,y,z;
+a = 1;
+b = 2;
+x = 10;
+y = 9;
+if(function_a(a,b) == 3) begin
+if(function_b(x) != 100) begin
+end
+else begin
+z = function_b(x) * function_b(y);
+end
+end
+end
+endmodule

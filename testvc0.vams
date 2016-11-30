@@ -1,10 +1,10 @@
 module testcv0;
 analog begin
-byte x;
-shortint y;
 integer a;
-begin
-
-end
+string b;
+a = 1;
+function_a(1,a);
+b = "Hello World";
+$display("%s",b);
 end
 endmodule

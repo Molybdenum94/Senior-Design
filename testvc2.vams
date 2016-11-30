@@ -1,0 +1,8 @@
+module testvc2;
+analog begin
+integer x;
+real y;
+x = function_a(x,20) + 20;
+y = function_b(y) * 2;
+end
+endmodule

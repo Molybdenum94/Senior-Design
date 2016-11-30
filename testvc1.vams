@@ -1,0 +1,11 @@
+module testvc1;
+analog begin
+int x;
+x = 10;
+if(x != 10)begin
+x = x << 10;
+end
+x = x & 1;
+$display("x: %d", function_a(x,10));
+end
+endmodule

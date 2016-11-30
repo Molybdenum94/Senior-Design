@@ -25,7 +25,8 @@ conditionalKeywords = [
 
 printKeywords = [
 	"printf",
-	"$display"
+	"$display",
+	"display"
 ]
 		
 #regex1 = '^(\w*)(?=\()' #case 1: function call at beginning of line
@@ -94,7 +95,7 @@ class Parser:
 
 	def isConditional(self,inputstring):
 		m1 = re.match(r'^(\bif\b)(?=\()', inputstring)
-		m2 = re.match(r'^(\belse\b)(?=\()', inputstring)
+		m2 = re.match(r'^(\belse\b)', inputstring)
 		if(m1 != None or m2 != None):
 			return True
 		elif(inputstring.find('}') != -1):

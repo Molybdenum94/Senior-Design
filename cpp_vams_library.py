@@ -20,7 +20,7 @@ def find_Verilog(cpp_key):
 
 #Returns corresponding C++ code for given Verilog function name
 def find_Cpp(verilog_key): 
-	return Cpp_to_Verilog.get(verilog_key, None) #returns None if no match	
+	return Verilog_to_Cpp.get(verilog_key, None) #returns None if no match	
 
 def print_Functions():
 	print "C++ function definitions: \n"

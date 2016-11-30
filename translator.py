@@ -95,10 +95,10 @@ if __name__ == "__main__":
 	else: #translate .vams to .cpp
 		with open(outputfile, 'w') as f:
 			for function in functions:#write function definitions above main
-				f.write(lb.find_Cpp(function) + ';\n')
+				f.write(lb.find_Cpp(function) + '\n')
 			f.write("int main(){\n")
 			for variable in variables:#declare variables
-				f.write(Verilog_to_Cpp[variable["type"]] + " " + variable["name"] + ";\n")
+				f.write(Verilog_to_Cpp[variable["type"]] + " " + variable["name"].rstrip(';') + ";\n")
 			for statement in statements:
 				if(statement["type"] == "assignment"):
 					f.write(statement["line"].replace(statement["datatype"] + " ", ""))
