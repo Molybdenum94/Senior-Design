@@ -17,64 +17,62 @@ import regex as re
 # 12. simple scoping
 
 Cpp_to_Verilog = { #contains mappings of both Verilog-C++ and C++-Verilog data types
-		"string":"string",
-		"char":"byte",
-		"short":"shortint",
-		"int":"integer",
-		"double":"real",
-		"unsigned":"unsigned",
-		"signed":"signed"
-		} 
+    "string":"string",
+    "char":"byte",
+    "short":"shortint",
+    "int":"integer",
+    "double":"real",
+    "unsigned":"unsigned",
+    "signed":"signed"
+} 
 
 Verilog_to_Cpp = {
-		"string":"string",
-		"byte":"char",
-		"shortint":"short",
-		"integer":"int",
-		"real":"double",
-		"unsigned":"unsigned",
-		"signed":"signed"
-		}
+	"string":"string",
+	"byte":"char",
+	"shortint":"short",
+	"integer":"int",
+	"real":"double",
+	"unsigned":"unsigned",
+	"signed":"signed"
+}
 		
+regex1 = '^(\w*)(?=\()' #case 1: function call at beginning of line
+regex2 = '(?<=\s)(\w*)(?=\()' #case 2: function call following whitespace
+regex3 = '(?<=\W)(\w*)(?=\()' #case 3: function call following non-alphanumeric character
+
 class Parser:
 
-	def __init__(filename,language):
+	def __init__(self,filename,language):
 		self.lines = [] #lines of input file
 		self.functions = []
 		self.variables = []
 		self.language = language
 		with open ("test2.cpp", 'rt') as in_file: # Open input file for reading of text data.
-			for line in in_file:# For each line of text, store it in a string variable named "line", and 
-			    lines.append(line.rstrip('\n')) # add that line to our list of lines.
-
-		self.processFunctions()
-		self.processKeywords()
-		for i in range(0, len(lines)): #first pass, find functions and variables
+			for line in in_file: # For each line of text, store it in a string variable named "line", and 
+				self.lines.append(line.rstrip('\n')) # add that line to our list of lines.
+		for i in range(0, len(self.lines)): #first pass, find functions and variables
 			if(self.language == "cpp"):
-				processKeywords(lines[i], Cpp_to_Verilog)
+				self.processKeywords(self.lines[i], Cpp_to_Verilog)
 			else:
-				processKeywords(lines[i], Verilog_to_Cpp)
-			processFunctions(lines[i])
+				self.processKeywords(self.lines[i], Verilog_to_Cpp)
+				self.processFunctions(self.lines[i])
 
-	def processKeywords(inputstring, keywordList):
+	def processKeywords(self,inputstring, keywordList):
 		found = False
-		for key in Cpp_keywords:
+		for key in keywordList:
 			regex = '^' + key
 			result = re.search(regex, inputstring)
 			if(result != None):
 				found = True
 		return found
 
-	def processFunctions(inputstring): 
-		regex1 = '^(\w*)(?=\()' #case 1: function call at beginning of line
-		regex2 = '(?<=\s)(\w*)(?=\()'#case 2: function call following whitespace
-		regex3 = '(?<=\W)(\W*)(?=\()'#case 3: function call following non-alphanumeric character
+	def processFunctions(self,inputstring):
 		m1 = re.match(regex1, inputstring)
+		m2 = re.search(regex2, inputstring) #Use search function for regexes with lookbehind assumptions (will search beginning of string)
+		m3 = re.search(regex3, inputstring)
 		if(m1 != None):
 			print m1.captures(0)
-		m2 = re.search(regex2, inputstring) #Use search function for regexes with lookbehind assumptions (will search beginning of string)
 		if(m2 != None):
 			print m2.captures(0)
-        m3 = re.search(regex3, inputstring)
-        if(m3 != None):
-            print m3.captures(0)
+		if(m3 != None):
+			print m3.captures(0)
