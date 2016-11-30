@@ -1,4 +1,4 @@
-import sys, getopt, os.path
+import sys, getopt, os.path, csv
 
 def main(argv):
     inputfile = ''
@@ -33,13 +33,24 @@ def main(argv):
         if ".vams" in outputfile:
             print ("")
             print ("input file is in C++ and output file is Verilog to be called:", outputfile)
-            print ("")
+            print ("")               
+# Imports the text file into an array
+            filetext = []
+            with open(inputfile, newline='') as textfile:
+                for row in csv.reader(textfile):
+                    filetext.append(row)
+            print (*filetext)
             sys.exit()
     elif ".vams" in inputfile:
         if ".cpp" in outputfile:
             print ("")
             print ("input file is in Verilog and output file is in C++ to be called:", outputfile)
-            print ("")
+            print ("")               
+            filetext = []
+            with open(inputfile, newline='') as textfile:
+                for row in csv.reader(textfile):
+                    filetext.append(row)
+            print (*filetext)
             sys.exit()
     print ("")
     print ("command.py -i <inputfile> -o <outputfilename>")
