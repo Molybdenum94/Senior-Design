@@ -1,0 +1,6 @@
+int main(){
+// variable declarations here
+// ...
+// executable code here
+// ...
+}

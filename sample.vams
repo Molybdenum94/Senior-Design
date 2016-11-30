@@ -1,0 +1,9 @@
+module sample;
+	// variable declarations here
+	real x;
+	analog begin
+	// executable code here
+		x = 1;
+	end
+
+endmodule
