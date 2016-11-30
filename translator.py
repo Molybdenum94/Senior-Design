@@ -1,24 +1,21 @@
-import library as lib
+import cpp_vams_library as lb
 import cpp_vams_parser as p
 
 import sys, getopt, os.path
 
 # Driver prototype for C++/Verilog translator
-# Constraints: 
-# 1. limited set of data types, no arrays. Only primitives, no hardware keywords in Verilog. 
-# C++ : signed, unsigned, char, short, int, float, double, string 
-# Verilog : signed, unsigned, byte, shortint, integer, shortreal, real, string
-# 2. no typecasting
-# 3. Conditionals allowed : if, else, for
-# 4. printf and $display only accept integer and string values
-# 5. one statement per line
-# 6. "=" surrounded by whitespace
-# 7. last non-whitespace character of line followed by ;
-# 8. VAMS procedural code encapsulated in analog begin/end blocks
-# 9. no macros
-# 10. no comments
-# 11. no consts
-# 12. simple scoping
+
+Cpp_to_Verilog = { #contains mappings of both Verilog-C++ and C++-Verilog data types
+    "string":"string",
+    "int":"integer",
+    "double":"real",
+} 
+
+Verilog_to_Cpp = {
+	"string":"string",
+	"integer":"int",
+	"real":"double",
+}
 
 def main(argv): #command line input-checker
     inputfile = ''
@@ -68,7 +65,59 @@ def main(argv): #command line input-checker
     sys.exit()
     
 if __name__ == "__main__":
-    inputfile, inputtype, outputfile = main(sys.argv[1:])
-    lib.print_Functions()
-    parser = p.Parser(inputfile, inputtype)
-    
+	inputfile, inputtype, outputfile = main(sys.argv[1:])
+	parser = p.Parser(inputfile, inputtype)
+	functions = parser.getFunctions()
+	variables = parser.getVariables()
+	statements = parser.getStatements()
+	if(inputtype == ".cpp"): #translate .cpp to .vams
+		with open(outputfile, 'w') as f:
+			f.write("module " + outputfile.rstrip('.vams') + ';\n')
+			for function in functions: #write function definitions
+				f.write(lb.find_Verilog(function) + '\n')
+			for variable in variables: #write variable declarations
+				f.write(Cpp_to_Verilog[variable["type"]] + " " + variable["name"].rstrip(';') + ";\n")
+			f.write("analog begin\n")
+			for statement in statements:
+				if(statement["type"] == "assignment"):
+					f.write(statement["line"].replace(statement["datatype"] + " ", ""))
+				elif(statement["type"] == "conditional"):
+					if(statement["open"] == True):
+						f.write(statement["line"].replace("{","begin"))
+					else:
+						f.write(statement["line"].replace("}","end"))
+				elif(statement["type"] == "print"):
+					f.write(statement["line"].replace("printf","$display"))
+				else:
+					f.write(statement["line"])
+			f.write("end\n")
+			f.write("endmodule")
+	else: #translate .vams to .cpp
+		with open(outputfile, 'w') as f:
+			for function in functions:#write function definitions above main
+				f.write(lb.find_Cpp(function) + ';\n')
+			f.write("int main(){\n")
+			for variable in variables:#declare variables
+				f.write(Verilog_to_Cpp[variable["type"]] + " " + variable["name"] + ";\n")
+			for statement in statements:
+				if(statement["type"] == "assignment"):
+					f.write(statement["line"].replace(statement["datatype"] + " ", ""))
+				elif(statement["type"] == "conditional"):
+					if(statement["open"] == True):
+						f.write(statement["line"].replace("begin","{"))
+					else:
+						f.write(statement["line"].replace("end","}"))
+				elif(statement["type"] == "print"):
+					f.write(statement["line"].replace("$display","printf"))
+				else:#write statement as is
+					f.write(statement["line"])
+			f.write("}")
+	#print input and output file contents for convenient comparison
+	f = open(inputfile, 'r')
+	contents = f.read()
+	print(contents)
+	f.close()
+	f = open(outputfile, 'r')
+	contents = f.read()
+	print(contents)
+	f.close()	 
