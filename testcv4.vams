@@ -1,0 +1,20 @@
+module testcv4;
+function real function_b;
+input x;
+real x;
+begin
+function_b x * x;
+end
+endfunction
+
+integer x,y,z;;
+real a,b,c;;
+analog begin
+x = 3;
+y = 2;
+z = x&y;
+a = 1.0;
+b = 2.0;
+c = function_b(a) * function_b(b) + 12345.678;
+end
+endmodule

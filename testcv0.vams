@@ -1,0 +1,17 @@
+module testcv0;
+function int function_a;
+input x,y;
+integer x,y;
+begin
+function_a = x + y;
+end
+endfunction
+
+integer x;
+string y;
+analog begin
+x = 1;
+function_a(x,1);
+y = "whatup";
+end
+endmodule

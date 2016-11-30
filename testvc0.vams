@@ -1,0 +1,10 @@
+module testcv0;
+analog begin
+byte x;
+shortint y;
+integer a;
+begin
+
+end
+end
+endmodule

@@ -1,0 +1,19 @@
+module testcv2;
+function int function_a;
+input x,y;
+integer x,y;
+begin
+function_a = x + y;
+end
+endfunction
+
+integer x;
+string sd;
+analog begin
+x = 1;
+x = function_a() + 1;
+sd = "Senior Design is fun";
+x = function_a(function_a(1,2),3);
+$display("%s",sd);
+end
+endmodule

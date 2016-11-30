@@ -1,0 +1,26 @@
+module testcv1;
+function void function_c;
+begin
+$display('Hello World')
+end
+endfunction
+
+function int function_a;
+input x,y;
+integer x,y;
+begin
+function_a = x + y;
+end
+endfunction
+
+integer x;;
+analog begin
+if(1 == 2)begin
+$display("How is this possible?");
+end
+function_c();
+x = 2 << 3;
+y = !x;
+$display("I rate myself %d out of 5 stars", function_a(x,y));
+end
+endmodule

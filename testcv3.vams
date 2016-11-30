@@ -1,0 +1,24 @@
+module testcv3;
+function real function_b;
+input x;
+real x;
+begin
+function_b x * x;
+end
+endfunction
+
+byte a;
+shortint b;
+shortreal c;
+real d;
+string e;
+real f;
+analog begin
+a = 0;
+b = 1;
+c = 2.0;
+d = 3.0;
+e = "four";
+f = function_b(d);
+end
+endmodule
