@@ -4,7 +4,13 @@ from tkinter import filedialog
 # ***** Window Config *****
 mainwindow = tkinter.Tk()
 mainwindow.title("ATE/Verilog Translator")
-mainwindow.geometry("400x320")
+w = 400
+h = 350
+ws = mainwindow.winfo_screenwidth()
+hs = mainwindow.winfo_screenheight()
+x = (ws/2) - (w/2)
+y = (hs/2) - (h/2)
+mainwindow.geometry('%dx%d+%d+%d' % (w, h, x, y))
 topFrame = tkinter.Frame(mainwindow)
 topFrame.pack()
 frame1 = tkinter.Frame(mainwindow)
@@ -37,9 +43,9 @@ spacer.pack()
 L2 = tkinter.Label(frame2, text="Output File Path")
 L2.pack(side=tkinter.LEFT)
 def getoutput():
-    mainwindow.outputfileName = filedialog.askdirectory()
-    if mainwindow.outputfileName != '':
-        outputtext.set(mainwindow.outputfileName)
+    mainwindow.outputfilePath = filedialog.askdirectory()
+    if mainwindow.outputfilePath != '':
+        outputtext.set(mainwindow.outputfilePath)
 outputtext = tkinter.StringVar()
 B2 = tkinter.Button(frame2, command=getoutput, relief=tkinter.SUNKEN, textvariable=outputtext)
 outputtext.set("                                         ")
@@ -47,6 +53,14 @@ B2.pack(side=tkinter.LEFT)
 def helpmenu():
     menu = tkinter.Tk()
     menu.title("Help Menu")
+    menu.geometry('%dx%d+%d+%d' % (w, h, x, y))
+    inputtitle = tkinter.Label(menu,
+                               text="Input File Path:",
+                               font="Helvetica 16 bold").pack()
+    inputhelp1 = tkinter.Label(menu,
+                              text="1. Click the box to the right of 'Input File Path' to open file explorer\n2. Select the .cpp or .vams file you want to convert\n3. Click 'Open'. The file path chosen will be displayed.",
+                               justify=tkinter.LEFT,
+                              font="Helvetica 12").pack()
 helpbutton = tkinter.Button(frame3, text="Help", pady=15, command=helpmenu)
 helpbutton.pack()
 
