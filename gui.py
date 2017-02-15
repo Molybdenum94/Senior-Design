@@ -4,10 +4,10 @@ from tkinter import filedialog
 # ***** Window Config *****
 mainwindow = tkinter.Tk()
 mainwindow.title("ATE/Verilog Translator")
-w = 400
-h = 350
 ws = mainwindow.winfo_screenwidth()
 hs = mainwindow.winfo_screenheight()
+w = ws/3
+h = hs/2
 x = (ws/2) - (w/2)
 y = (hs/2) - (h/2)
 mainwindow.geometry('%dx%d+%d+%d' % (w, h, x, y))
@@ -58,9 +58,18 @@ def helpmenu():
                                text="Input File Path:",
                                font="Helvetica 16 bold").pack()
     inputhelp1 = tkinter.Label(menu,
-                              text="1. Click the box to the right of 'Input File Path' to open file explorer\n2. Select the .cpp or .vams file you want to convert\n3. Click 'Open'. The file path chosen will be displayed.",
+                               text="1. Click the box to the right of 'Input File Path' to open file explorer\n2. Select the .cpp or .vams file you want to convert\n3. Click 'Open'. The file path chosen will be displayed.",
                                justify=tkinter.LEFT,
-                              font="Helvetica 12").pack()
+                               font="Helvetica 12").pack()
+    spacer = tkinter.Label(menu,
+                           text=" ").pack()
+    outputtitle = tkinter.Label(menu,
+                                text="Output File Path:",
+                                font="Helvetica 16 bold").pack()
+    outputhelp1 = tkinter.Label(menu,
+                                text="1. Click the box to the right of 'Output File Path' to open file explorer\n2. Select the DIRECTORY you want the output file to be in\n3 Click 'Choose'. The file path chosen will be displayed.",
+                                justify=tkinter.LEFT,
+                                font="Helvetica 12").pack()
 helpbutton = tkinter.Button(frame3, text="Help", pady=15, command=helpmenu)
 helpbutton.pack()
 
