@@ -79,16 +79,29 @@ def helpmenu():
 helpbutton = tkinter.Button(frame3, text="Help", pady=15, command=helpmenu)
 helpbutton.pack()
 
-# ***** Main Function *****
-def convert():
-    button.destroy()
-    button2 = tkinter.Button(frame3, text="Converting...", state=tkinter.DISABLED)
-    button2.pack()
+
+
+# ********** MAIN FUNCTION **********
+def main():
+    #Put main function here
     time.sleep(3)
+    mainwindow.button2.destroy()
+    mainwindow.button = tkinter.Button(frame3, text="Convert", command=convert)
+    mainwindow.button.pack()
+    mainwindow.update_idletasks()
+    mainwindow.update()
 
-    #Put Code Here
-        
-button = tkinter.Button(frame3, text="Convert", command=convert)
-button.pack()
 
+
+# ***** Program Execution Button *****
+def convert():
+    mainwindow.button.destroy()
+    mainwindow.button2 = tkinter.Button(frame3, text="Converting...", state=tkinter.DISABLED)
+    mainwindow.button2.pack()
+    mainwindow.update_idletasks()
+    mainwindow.update()
+    main()
+       
+mainwindow.button = tkinter.Button(frame3, text="Convert", command=convert)
+mainwindow.button.pack()
 mainwindow.mainloop()
