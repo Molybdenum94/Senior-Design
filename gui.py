@@ -1,9 +1,11 @@
 import tkinter
+import time
 from tkinter import filedialog
 
 # ***** Window Config *****
 mainwindow = tkinter.Tk()
 mainwindow.title("ATE/Verilog Translator")
+mainwindow.configure(background='white')
 ws = mainwindow.winfo_screenwidth()
 hs = mainwindow.winfo_screenheight()
 w = ws/3
@@ -54,6 +56,7 @@ def helpmenu():
     menu = tkinter.Tk()
     menu.title("Help Menu")
     menu.geometry('%dx%d+%d+%d' % (w, h, x, y))
+    menu.configure(background='white')
     inputtitle = tkinter.Label(menu,
                                text="Input File Path:",
                                font="Helvetica 16 bold").pack()
@@ -78,6 +81,7 @@ def convert():
     button.destroy()
     button2 = tkinter.Button(frame3, text="Converting...", state=tkinter.DISABLED)
     button2.pack()
+    time.sleep(3)
 
     #Put Code Here
         
