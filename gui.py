@@ -5,7 +5,6 @@ from tkinter import filedialog
 # ***** Window Config *****
 mainwindow = tkinter.Tk()
 mainwindow.title("ATE/Verilog Translator")
-mainwindow.configure(background='white')
 ws = mainwindow.winfo_screenwidth()
 hs = mainwindow.winfo_screenheight()
 w = ws/3
@@ -25,31 +24,31 @@ frame3 = tkinter.Frame(mainwindow)
 frame3.pack()
 
 # ***** Widgets *****
-title = tkinter.Label(topFrame, bg='white', text="Welcome to the ATE/Verilog Translator")
+title = tkinter.Label(topFrame, text="Welcome to the ATE/Verilog Translator")
 title.pack()
 photo = tkinter.PhotoImage(file="images.gif")
-L0 = tkinter.Label(topFrame, image=photo, bg='white', bd=0)
+L0 = tkinter.Label(topFrame, image=photo)
 L0.pack()
-L1 = tkinter.Label(frame1, text="Input File Path  ", padx=2, bg='white', bd=0)
+L1 = tkinter.Label(frame1, text="Input File Path  ", padx=2)
 L1.pack(side=tkinter.LEFT)
 def getinput():
     mainwindow.inputfileName = filedialog.askopenfilename( filetypes = (("ATE files", "*.cpp"), ("Verilog files", "*.vams")))
     if mainwindow.inputfileName != '':
         inputtext.set(mainwindow.inputfileName)
 inputtext = tkinter.StringVar()
-B1 = tkinter.Button(frame1, command=getinput, relief=tkinter.SUNKEN, textvariable=inputtext, bg='white', bd=0)
+B1 = tkinter.Button(frame1, command=getinput, relief=tkinter.SUNKEN, textvariable=inputtext)
 inputtext.set("                                         ")
 B1.pack(side=tkinter.LEFT)
-spacer = tkinter.Label(space, text="           ", bg='white', bd=0)
+spacer = tkinter.Label(space, text="           ")
 spacer.pack()
-L2 = tkinter.Label(frame2, text="Output File Path", bg='white', bd=0)
+L2 = tkinter.Label(frame2, text="Output File Path")
 L2.pack(side=tkinter.LEFT)
 def getoutput():
     mainwindow.outputfilePath = filedialog.askdirectory()
     if mainwindow.outputfilePath != '':
         outputtext.set(mainwindow.outputfilePath)
 outputtext = tkinter.StringVar()
-B2 = tkinter.Button(frame2, command=getoutput, relief=tkinter.SUNKEN, textvariable=outputtext, bg='white', bd=0)
+B2 = tkinter.Button(frame2, command=getoutput, relief=tkinter.SUNKEN, textvariable=outputtext)
 outputtext.set("                                         ")
 B2.pack(side=tkinter.LEFT)
 def helpmenu():
@@ -67,8 +66,7 @@ def helpmenu():
                                font="Helvetica 12",
                                bg='white').pack()
     spacer = tkinter.Label(menu,
-                           text=" ",
-                           bg='white').pack()
+                           text=" ", bg='white').pack()
     outputtitle = tkinter.Label(menu,
                                 text="Output File Path:",
                                 font="Helvetica 16 bold",
@@ -78,7 +76,7 @@ def helpmenu():
                                 justify=tkinter.LEFT,
                                 font="Helvetica 12",
                                 bg='white').pack()
-helpbutton = tkinter.Button(frame3, text="Help", pady=15, command=helpmenu, bg='white', bd=0)
+helpbutton = tkinter.Button(frame3, text="Help", pady=15, command=helpmenu)
 helpbutton.pack()
 
 # ***** Main Function *****
@@ -86,10 +84,11 @@ def convert():
     button.destroy()
     button2 = tkinter.Button(frame3, text="Converting...", state=tkinter.DISABLED)
     button2.pack()
+    time.sleep(3)
 
     #Put Code Here
         
-button = tkinter.Button(frame3, text="Convert", command=convert, bg='white', bd=0)
+button = tkinter.Button(frame3, text="Convert", command=convert)
 button.pack()
 
 mainwindow.mainloop()
