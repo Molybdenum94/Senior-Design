@@ -51,6 +51,8 @@ outputtext = tkinter.StringVar()
 B2 = tkinter.Button(frame2, command=getoutput, relief=tkinter.SUNKEN, textvariable=outputtext)
 outputtext.set("                                         ")
 B2.pack(side=tkinter.LEFT)
+
+# ***** Help Menu *****
 def helpmenu():
     menu = tkinter.Tk()
     menu.title("Help Menu")
@@ -84,12 +86,9 @@ helpbutton.pack()
 # ********** MAIN FUNCTION **********
 def main():
     #Put main function here
-    time.sleep(3)
-    mainwindow.button2.destroy()
-    mainwindow.button = tkinter.Button(frame3, text="Convert", command=convert)
-    mainwindow.button.pack()
-    mainwindow.update_idletasks()
-    mainwindow.update()
+    time.sleep(1)
+
+
 
 
 
@@ -101,6 +100,12 @@ def convert():
     mainwindow.update_idletasks()
     mainwindow.update()
     main()
+    mainwindow.button2.destroy()
+    mainwindow.button = tkinter.Button(frame3, text="Convert", command=convert)
+    mainwindow.button.pack()
+    mainwindow.update_idletasks()
+    mainwindow.update()
+
        
 mainwindow.button = tkinter.Button(frame3, text="Convert", command=convert)
 mainwindow.button.pack()
