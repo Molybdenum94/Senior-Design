@@ -111,7 +111,7 @@ def kill(error):
     
 def done(getname):
     getname.grab_release()
-    if mainwindow.outputname.get() != '' and not "." in mainwindow.outputname.get():
+    if mainwindow.outputname.get() != '' and not "." in mainwindow.outputname.get() and not "\\" in mainwindow.outputname.get() and not "/" in mainwindow.outputname.get() and not ":" in mainwindow.outputname.get() and not "*" in mainwindow.outputname.get() and not "?" in mainwindow.outputname.get() and not '"' in mainwindow.outputname.get() and not "<" in mainwindow.outputname.get() and not ">" in mainwindow.outputname.get() and not "|" in mainwindow.outputname.get():
         getname.destroy()
         if ".cpp" in mainwindow.inputtext.get():
             mainwindow.outputtext.set(mainwindow.outputfilePath+"/"+mainwindow.outputname.get()+".vams")
