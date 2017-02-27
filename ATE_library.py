@@ -9,14 +9,16 @@ VARIABLE_ID = "unknown"
 class Dictionary(object):
 
 	ATE = {
-	'example1'		: "Give me values for parameters {0}, {1}, and {2}",
-	'example2'		: "But now only give me {0} {1}.",
-	'example3'		: "Jeff Gordon drives number {2}",
-	'examplary'		: ['example1','example2','example3'],
+
+	'function1'		: "Give me {0} {1} and {2}",
+	'function2'		: "Jeff Gordon #{3} {4}",
+	'function3'		: ['function1','function2'],
+
 	'cbitclose' 	: "Stuff goes here",
 	'cbitopen' 		: "Stuff goes here",
 	'connect'		: "Stuff goes here",
 	'disconnect'	: "Stuff goes here"
+
 	}
 # ---------- RESOURCE COMMANDS ---------- #
 
@@ -66,23 +68,38 @@ class libraryObject:
 # ---------- TRANSLATE COMMAND ---------- #
 # Recursively search function dictionary for line by line translation
 def translate(funcName, variables):
-	function = libraryObject(funcName)
-	function.setDef()
-	if isinstance(function.definition, list):
+	if type(funcName) is str:
+		function = libraryObject(funcName)
+		function.setDef()
+		if isinstance(function.definition, list):
+			funcList = []
+			for entry in range(0, len(function.definition)):
+				nextFunction = translate(function.definition[entry], variables)
+				funcList.append(nextFunction)
+			return funcList
+		elif isinstance(function.definition, str):
+			function.setVars(variables)
+			return function.definition
+		else:
+			raise TypeError('unsupported operand type for ' + repr(str))
+	elif type(funcName) is list:
 		funcList = []
-		for entry in range(0, len(function.definition)):
-			nextFunction = translate(function.definition[entry], variables)
-			funcList.append(nextFunction)
+		for singleFunc in funcName:
+			nextFunction = translate(singleFunc, variables)
+			if type(nextFunction) is str:
+				funcList.append(nextFunction)
+			if type(nextFunction) is list:
+				funcList.extend(nextFunction)
 		return funcList
-	elif isinstance(function.definition, str):
-		function.setVars(variables)
-		return function.definition
 	else:
-		raise TypeError('unsupported operand type for ' + repr(str))
+		raise TypeError('unsupported operand type for ' + repr(funcName))
+
+def libPrint(list):
+	print ('\n'.join(list))
 
 # ---------- TRANSLATE COMMAND ---------- #
 
-string = 'examplary'
-vars = ['blue','applesauce', 24]
+string = ['function3','function1']
+vars = ['silver','blue','gold', 24,'wins']
 result = translate(string,vars)
-print (result)
+libPrint(result)
