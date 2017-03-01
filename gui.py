@@ -1,5 +1,5 @@
 import tkinter
-import translator as *
+import translator
 import time
 from tkinter import filedialog
 
@@ -129,7 +129,7 @@ def convert():
     mainwindow.update()
     
 #***** MAIN *****
-    main(mainwindow.inputtext, mainwindow.outputtext)
+    translator.main(mainwindow.inputtext, mainwindow.outputfilePath, mainwindow.outputname)
     
     
     mainwindow.B1.config(state="active")
