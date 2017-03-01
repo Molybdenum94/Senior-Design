@@ -18,6 +18,7 @@ Verilog_to_Cpp = {
 }
 
 def main(i, o, outputName): #command line input-checker
+	#print ("Hello World")
 	inputPath = i.get()
 	outputPath = o.get()
 	parser = p.Parser(inputPath, inputtype)
