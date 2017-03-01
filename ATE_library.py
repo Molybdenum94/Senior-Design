@@ -16,11 +16,10 @@ VARIABLE_ID = "unknown"
 # ---------- CONSTANTS ---------- #
 # ---------- RESOURCE COMMANDS ---------- #
 class Dictionary(object):
-
 	ATE = {
 	'cbitclose' 	: "Stuff goes here",
-	'cbitopen' 		: "Stuff goes here",
-	'connect'		: "Stuff goes here",
+	'cbitopen' 	: "Stuff goes here",
+	'connect'	: "Stuff goes here",
 	'disconnect'	: "Stuff goes here"
 	}
 # ---------- RESOURCE COMMANDS ---------- #
