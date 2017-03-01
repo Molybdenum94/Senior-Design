@@ -1,27 +1,29 @@
-# Prototype for constucting library object
+# ---------- EXAMPLE CALL ---------- #
 
+# To call from another module
+	# ATE_library.translate(string,variables)
+
+# Translate returns an array for instructions
+	# result = translate(string,vars)
+
+# Print line by line
+	# ATE_library.libPrint(result)
+
+# ---------- EXAMPLE CALL ---------- #
 # ---------- CONSTANTS ---------- #
 # define the substring to be replaced in definitions in the dictionary 
 VARIABLE_ID = "unknown"
 # ---------- CONSTANTS ---------- #
-
 # ---------- RESOURCE COMMANDS ---------- #
 class Dictionary(object):
 
 	ATE = {
-
-	'function1'		: "Give me {0} {1} and {2}",
-	'function2'		: "Jeff Gordon #{3} {4}",
-	'function3'		: ['function1','function2'],
-
 	'cbitclose' 	: "Stuff goes here",
 	'cbitopen' 		: "Stuff goes here",
 	'connect'		: "Stuff goes here",
 	'disconnect'	: "Stuff goes here"
-
 	}
 # ---------- RESOURCE COMMANDS ---------- #
-
 # ---------- LIBRARY OBJECTS ---------- #
 class libraryObject:
 
@@ -35,37 +37,30 @@ class libraryObject:
 		self.name = name
 		self.definition = False
 		self.variables = []
-
 	# print name of ATE resource command
 	def printName(self):
 		print (self.name)
-
 	# retrieve ATE resource command
 	def setDef(self):
 		self.definition = Dictionary.ATE[self.name]
-
 	def printDef(self):
 		if self.definition is False:
 			raise ValueError('no definition assigned to object')
 		else:
 			print (self.definition)
-
 	# retrieve and set variables
 	def numVars(self):
 		return (len(self.variables))
-
 	def setVars(self, list):
 		if self.definition is False:
 			self.setDef()
 		self.variables = list
 		self.definition = self.definition.format(*self.variables)
-
 	def printVars(self):
 		print (self.variables)
 
 # ---------- LIBRARY OBJECTS ---------- #
-
-# ---------- TRANSLATE COMMAND ---------- #
+# ---------- LIBRARY COMMANDS ---------- #
 # Recursively search function dictionary for line by line translation
 def translate(funcName, variables):
 	if type(funcName) is str:
@@ -97,9 +92,5 @@ def translate(funcName, variables):
 def libPrint(list):
 	print ('\n'.join(list))
 
-# ---------- TRANSLATE COMMAND ---------- #
+# ---------- LIBRARY COMMANDS ---------- #
 
-string = ['function3','function1']
-vars = ['silver','blue','gold', 24,'wins']
-result = translate(string,vars)
-libPrint(result)
