@@ -23,10 +23,10 @@ def find_Cpp(verilog_key):
 	return Verilog_to_Cpp.get(verilog_key, None) #returns None if no match	
 
 def print_Functions():
-	print "C++ function definitions: \n"
+	print ("C++ function definitions: \n")
 	for function in Verilog_to_Cpp.values():
-		print function + '\n'
-	print "Verilog function definitions: \n"
+		print (function + '\n')
+	print ("Verilog function definitions: \n")
 	for function in Cpp_to_Verilog.values():
-		print function + '\n'
+		print (function + '\n')
 	
