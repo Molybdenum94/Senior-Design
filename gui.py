@@ -127,7 +127,11 @@ def convert():
     mainwindow.button2.pack()
     mainwindow.update_idletasks()
     mainwindow.update()
+    
+#***** MAIN *****
     main(mainwindow.inputtext, mainwindow.outputtext)
+    
+    
     mainwindow.B1.config(state="active")
     mainwindow.B2.config(state="active")
     mainwindow.outputtext.set(mainwindow.outputfilePath)
