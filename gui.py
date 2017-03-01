@@ -1,4 +1,5 @@
 import tkinter
+import translator as *
 import time
 from tkinter import filedialog
 
@@ -95,16 +96,6 @@ helpbutton = tkinter.Button(frame3, text="Help", pady=15, command=helpmenu)
 helpbutton.pack()
 
 
-
-# ********** MAIN FUNCTION **********
-def main():
-    #Put main function here
-    time.sleep(3)
-
-
-
-
-
 # ***** Program Execution Button and Widgets *****
 def kill(error):
     error.destroy()
@@ -136,7 +127,7 @@ def convert():
     mainwindow.button2.pack()
     mainwindow.update_idletasks()
     mainwindow.update()
-    main()
+    main(mainwindow.inputtext, mainwindow.outputtext)
     mainwindow.B1.config(state="active")
     mainwindow.B2.config(state="active")
     mainwindow.outputtext.set(mainwindow.outputfilePath)
